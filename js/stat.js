@@ -53,10 +53,9 @@ function getWinner(times, names) {
 
 function drawMessage(ctx, times, names, arrayOfPoints, padding, lineHeight) {
   var winner = getWinner(times, names);
-  var winnerMessage;
+  var winnerMessage = winner === PLAYER ? 'Ура, ' + PLAYER + ' победили!' : 'Ура, игрок ' + winner + ' победил!';
   ctx.fillStyle = COLOR_TEXT;
   ctx.font = FONT;
-  winnerMessage = winner === PLAYER ? 'Ура, ' + PLAYER + ' победили!' : 'Ура, игрок ' + winner + ' победил!';
   ctx.fillText(winnerMessage, arrayOfPoints[0].x + padding, arrayOfPoints[0].y + padding);
   ctx.fillText('Список результатов:', arrayOfPoints[0].x + padding, arrayOfPoints[0].y + padding + lineHeight);
 }
