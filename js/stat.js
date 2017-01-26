@@ -19,7 +19,6 @@ var COLUMN_WIDTH = 40;
 var COLUMN_INDENT = 50;
 var PADDING = 30;
 var LINE_HEIGHT = 20;
-var winnerMessage;
 
 // Функция отрисовки окна сообщения
 function drawWindowMessage(ctx, arrayOfPoints) {
@@ -54,6 +53,7 @@ function getWinner(times, names) {
 
 function drawMessage(ctx, times, names, arrayOfPoints, padding, lineHeight) {
   var winner = getWinner(times, names);
+  var winnerMessage;
   ctx.fillStyle = COLOR_TEXT;
   ctx.font = FONT;
   winnerMessage = winner === PLAYER ? 'Ура, ' + PLAYER + ' победили!' : 'Ура, игрок ' + winner + ' победил!';
