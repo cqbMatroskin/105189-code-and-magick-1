@@ -69,7 +69,7 @@ function getRandomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function paintColumn(name) {
+function paintColumns(name) {
   var otherPlayerColor = 'rgba(0, 0, 255, ' + getRandomNumber(0.1, 1) + ')';
   return (name === PLAYER) ? PLAYER_COLOR : otherPlayerColor;
 }
@@ -81,7 +81,7 @@ function drawColumns(ctx, arrayOfPoints, lineHeight, max, times, names, padding)
   for (var i = 0; i < times.length; i++) {
     var playerTime = times[i];
     var height = -step * playerTime;
-    ctx.fillStyle = paintColumn(names[i]);
+    ctx.fillStyle = paintColumns(names[i]);
     // Отрисовка колонок: columnX - стартовая точка отрисовки колонки
     // сумму отступа между колонками и ширину колонок умножаем на индекс элемента массива
     // к результату прибавляем стартовую точку
