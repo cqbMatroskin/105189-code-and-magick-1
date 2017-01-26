@@ -19,7 +19,7 @@ var COLUMN_WIDTH = 40;
 var COLUMN_INDENT = 50;
 var PADDING = 30;
 var LINE_HEIGHT = 20;
-var WINNER_MESSAGE;
+var winnerMessage;
 
 // Функция отрисовки окна сообщения
 function drawWindowMessage(ctx, arrayOfPoints) {
@@ -40,7 +40,7 @@ function drawWindowMessage(ctx, arrayOfPoints) {
   ctx.shadowOffsetY = 0;
 }
 
-function getMinTime(times, names) {
+function getWinner(times, names) {
   var min = times[0];
   var winner;
   for (var i = 0; i < times.length; i++) {
@@ -53,11 +53,11 @@ function getMinTime(times, names) {
 }
 
 function drawMessage(ctx, times, names, arrayOfPoints, padding, lineHeight) {
-  var winner = getMinTime(times, names);
+  var winner = getWinner(times, names);
   ctx.fillStyle = COLOR_TEXT;
   ctx.font = FONT;
-  WINNER_MESSAGE = (winner === PLAYER) ? 'Ура, ' + PLAYER + ' победили!' : 'Ура, игрок ' + winner + ' победил!';
-  ctx.fillText(WINNER_MESSAGE, arrayOfPoints[0].x + padding, arrayOfPoints[0].y + padding);
+  winnerMessage = winner === PLAYER ? 'Ура, ' + PLAYER + ' победили!' : 'Ура, игрок ' + winner + ' победил!';
+  ctx.fillText(winnerMessage, arrayOfPoints[0].x + padding, arrayOfPoints[0].y + padding);
   ctx.fillText('Список результатов:', arrayOfPoints[0].x + padding, arrayOfPoints[0].y + padding + lineHeight);
 }
 // Функция возвращает максимальный элемент массива
