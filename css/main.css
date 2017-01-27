@@ -545,7 +545,7 @@ input[type=radio]:checked + .review-mark-label {
 
   position: fixed;
   left: 50%;
-  top: 100px;
+  top: 30px;
   transform: translateX(-50%);
 
   padding: 20px;
