@@ -1,29 +1,29 @@
 'use strict';
 
-var ElementSetupWindow = document.querySelector('.setup');
-var ElementSetupOpen = document.querySelector('.setup-open');
-var ElementSetupClose = ElementSetupWindow.querySelector('.setup-close');
-var ElementInputName = ElementSetupWindow.querySelector('.setup-user-name');
-var ElementSetupWizard = ElementSetupWindow.querySelector('.setup-wizard');
-var ElementWizardCout = ElementSetupWizard.querySelector('#wizard-coat');
-var ElementWizardEyes = ElementSetupWizard.querySelector('#wizard-eyes');
-var ElementWizarFireBall = ElementSetupWindow.querySelector('.setup-fireball-wrap');
-var colorsCount = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var colorsEyes = ['black', 'red', 'blue', 'yellow', 'green'];
-var colorsFireBall = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-var i = 0;
-function displaySetupWindow() {
-  ElementSetupWindow.classList.toggle('invisible');
-  validateName();
+var SetupWindowElement = document.querySelector('.setup');
+var SetupOpenElement = document.querySelector('.setup-open');
+var SetupCloseElement = SetupWindowElement.querySelector('.setup-close');
+var InputNameElement = SetupWindowElement.querySelector('.setup-user-name');
+var SetupWizardElement = SetupWindowElement.querySelector('.setup-wizard');
+var WizardCoutElement = SetupWizardElement.querySelector('#wizard-coat');
+var WizardEyesElement = SetupWizardElement.querySelector('#wizard-eyes');
+var WizarFireBallElement = SetupWindowElement.querySelector('.setup-fireball-wrap');
+var COLORS_COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var COLORS_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
+var COLORS_FIRE_BALL = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var currentCoatColorIndex = 0;
+
+function openSetupWindow() {
+  SetupWindowElement.classList.remove('invisible');
 }
 
-// function closeSetupWindow() {
-//   ElementSetupWindow.classList.add('invisible');
-// }
+function closeSetupWindow() {
+  SetupWindowElement.classList.add('invisible');
+}
 
-function validateName() {
-  ElementInputName.required = true;
-  ElementInputName.maxLength = 50;
+function setNameValidation() {
+  InputNameElement.required = true;
+  InputNameElement.maxLength = 50;
 }
 
 // функция возвращает случайный индекс переданного в неё массива
@@ -33,23 +33,21 @@ function returnRandomIndex(array) {
 
 // выводим мантии по порядку
 function paintWizardCout() {
-  if (i === colorsCount.length - 1) {
-    i = 0;
-  }
-  i++;
-  ElementWizardCout.style.fill = colorsCount[i];
+  currentCoatColorIndex = (currentCoatColorIndex + 1) % COLORS_COAT.length;
+  WizardCoutElement.style.fill = COLORS_COAT[currentCoatColorIndex];
 }
 
 function paintWizardEyes() {
-  ElementWizardEyes.style.fill = colorsEyes[returnRandomIndex(colorsEyes)];
+  WizardEyesElement.style.fill = COLORS_EYES[returnRandomIndex(COLORS_EYES)];
 }
 
 function paintFireBall() {
-  ElementWizarFireBall.style.background = colorsFireBall[returnRandomIndex(colorsEyes)];
+  WizarFireBallElement.style.background = COLORS_FIRE_BALL[returnRandomIndex(COLORS_EYES)];
 }
 
-ElementSetupOpen.addEventListener('click', displaySetupWindow);
-ElementSetupClose.addEventListener('click', displaySetupWindow);
-ElementWizardCout.addEventListener('click', paintWizardCout);
-ElementWizardEyes.addEventListener('click', paintWizardEyes);
-ElementWizarFireBall.addEventListener('click', paintFireBall);
+window.addEventListener('load', setNameValidation);
+SetupOpenElement.addEventListener('click', openSetupWindow);
+SetupCloseElement.addEventListener('click', closeSetupWindow);
+WizardCoutElement.addEventListener('click', paintWizardCout);
+WizardEyesElement.addEventListener('click', paintWizardEyes);
+WizarFireBallElement.addEventListener('click', paintFireBall);
