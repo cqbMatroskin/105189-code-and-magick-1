@@ -1,29 +1,38 @@
 'use strict';
 
-var SetupWindowElement = document.querySelector('.setup');
-var SetupOpenElement = document.querySelector('.setup-open');
-var SetupCloseElement = SetupWindowElement.querySelector('.setup-close');
-var InputNameElement = SetupWindowElement.querySelector('.setup-user-name');
-var SetupWizardElement = SetupWindowElement.querySelector('.setup-wizard');
-var WizardCoutElement = SetupWizardElement.querySelector('#wizard-coat');
-var WizardEyesElement = SetupWizardElement.querySelector('#wizard-eyes');
-var WizarFireBallElement = SetupWindowElement.querySelector('.setup-fireball-wrap');
-var COLORS_COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var COLORS_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
-var COLORS_FIRE_BALL = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var setupWindowElement = document.querySelector('.setup');
+var setupOpenElement = document.querySelector('.setup-open');
+var setupCloseElement = setupWindowElement.querySelector('.setup-close');
+var inputNameElement = setupWindowElement.querySelector('.setup-user-name');
+var setupWizardElement = setupWindowElement.querySelector('.setup-wizard');
+var wizardCoatElement = setupWizardElement.querySelector('#wizard-coat');
+var wizardEyesElement = setupWizardElement.querySelector('#wizard-eyes');
+var wizarFireBallElement = setupWindowElement.querySelector('.setup-fireball-wrap');
 var currentCoatColorIndex = 0;
+var colors = {
+  FOR_COAT: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
+  FOR_EYES: ['black', 'red', 'blue', 'yellow', 'green'],
+  FOR_FIRE_BALL: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
+};
 
 function openSetupWindow() {
-  SetupWindowElement.classList.remove('invisible');
+  setupWindowElement.classList.remove('invisible');
+  wizardCoatElement.addEventListener('click', paintWizardCoat);
+  wizardEyesElement.addEventListener('click', paintWizardEyes);
+  wizarFireBallElement.addEventListener('click', paintFireBall);
+
 }
 
 function closeSetupWindow() {
-  SetupWindowElement.classList.add('invisible');
+  setupWindowElement.classList.add('invisible');
+  wizardCoatElement.removeEventListener('click', paintWizardCoat);
+  wizardEyesElement.removeEventListener('click', paintWizardEyes);
+  wizarFireBallElement.removeEventListener('click', paintFireBall);
 }
 
 function setNameValidation() {
-  InputNameElement.required = true;
-  InputNameElement.maxLength = 50;
+  inputNameElement.required = true;
+  inputNameElement.maxLength = 50;
 }
 
 // функция возвращает случайный индекс переданного в неё массива
@@ -32,22 +41,19 @@ function returnRandomIndex(array) {
 }
 
 // выводим мантии по порядку
-function paintWizardCout() {
-  currentCoatColorIndex = (currentCoatColorIndex + 1) % COLORS_COAT.length;
-  WizardCoutElement.style.fill = COLORS_COAT[currentCoatColorIndex];
+function paintWizardCoat() {
+  currentCoatColorIndex = (currentCoatColorIndex + 1) % colors.FOR_COAT.length;
+  wizardCoatElement.style.fill = colors.FOR_COAT[currentCoatColorIndex];
 }
 
 function paintWizardEyes() {
-  WizardEyesElement.style.fill = COLORS_EYES[returnRandomIndex(COLORS_EYES)];
+  wizardEyesElement.style.fill = colors.FOR_EYES[returnRandomIndex(colors.FOR_EYES)];
 }
 
 function paintFireBall() {
-  WizarFireBallElement.style.background = COLORS_FIRE_BALL[returnRandomIndex(COLORS_EYES)];
+  wizarFireBallElement.style.background = colors.FOR_FIRE_BALL[returnRandomIndex(colors.FOR_EYES)];
 }
 
 window.addEventListener('load', setNameValidation);
-SetupOpenElement.addEventListener('click', openSetupWindow);
-SetupCloseElement.addEventListener('click', closeSetupWindow);
-WizardCoutElement.addEventListener('click', paintWizardCout);
-WizardEyesElement.addEventListener('click', paintWizardEyes);
-WizarFireBallElement.addEventListener('click', paintFireBall);
+setupOpenElement.addEventListener('click', openSetupWindow);
+setupCloseElement.addEventListener('click', closeSetupWindow);
