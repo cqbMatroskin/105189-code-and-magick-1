@@ -54,6 +54,6 @@ function paintFireBall() {
   wizarFireBallElement.style.background = colors.FOR_FIRE_BALL[returnRandomIndex(colors.FOR_EYES)];
 }
 
-window.addEventListener('load', setNameValidation);
+setNameValidation();
 setupOpenElement.addEventListener('click', openSetupWindow);
 setupCloseElement.addEventListener('click', closeSetupWindow);
